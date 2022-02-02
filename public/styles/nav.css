@@ -1,0 +1,36 @@
+.nav {
+  height: 120px;
+  width: 100vw;
+  background-color: #4056a1;
+  color: #ffffff;
+  padding: 0 1.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 1em;
+  z-index: 100;
+}
+.fixed {
+  position: fixed;
+}
+.filler {
+  visibility: hidden;
+}
+
+nav > span {
+  font-family: "Bungee", sans-serif;
+  display: flex;
+  align-items: flex-end;
+  font-size: 2em;
+}
+
+nav i {
+  color: red;
+}
+
+.tweet {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
