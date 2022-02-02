@@ -4,7 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
-const escape = function (str) {
+const escapeTxt = function (str) {
   let div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
@@ -21,7 +21,7 @@ $(() => {
       </div>
       <span>${user.handle}</span>
     </header>
-    <p>${escape(content.text)}<</p>
+    <p>${escapeTxt(content.text)}<</p>
     <footer>
       <span>${timeago.format(created_at)}</span>
       <div>
@@ -58,18 +58,23 @@ $(() => {
     event.preventDefault();
     const tweetLength = $("#tweet-text").val().length;
     if (tweetLength > 140) {
-      alert("Sorry, tweet is too long!");
+      $("#error-msg").html("Sorry, the tweet is too long!");
+      $("#error-msg").slideDown("fast");
       return;
     }
     if (tweetLength === 0) {
-      alert("Why post an empty tweet?");
+      $("#error-msg").html("It's not possible to post an empty tweet");
+      $("#error-msg").slideDown("fast");
       return;
     }
     $.post("/tweets", $("#newTweet").serialize())
       .then(() => {
-        alert("Tweet submited!");
         $("#tweet-text").val("");
         $(".counter").val("140");
+
+        if ($("#error-msg").css("display") === "block") {
+          $("#error-msg").css({ display: "none" });
+        }
         loadTweets();
       })
       .catch(() => alert("Sorry, there was an error"));

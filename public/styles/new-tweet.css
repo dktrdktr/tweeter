@@ -1,7 +1,4 @@
 .new-tweet {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 2em 0;
 }
 
@@ -44,4 +41,11 @@
 
 .counter-char-limit {
   color: red;
+}
+
+.error {
+  border: solid red;
+  padding: 1em;
+  color: red;
+  display: none;
 }
