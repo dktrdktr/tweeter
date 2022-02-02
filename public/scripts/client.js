@@ -4,6 +4,12 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+const escape = function (str) {
+  let div = document.createElement("div");
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+};
+
 $(() => {
   const createTweetElement = ({ user, content, created_at }) => {
     const htmlMarkup = `
@@ -15,7 +21,7 @@ $(() => {
       </div>
       <span>${user.handle}</span>
     </header>
-    <p>${content.text}</p>
+    <p>${escape(content.text)}<</p>
     <footer>
       <span>${timeago.format(created_at)}</span>
       <div>
