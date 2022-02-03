@@ -77,7 +77,13 @@ $(() => {
         }
         loadTweets();
       })
-      .catch(() => alert("Sorry, there was an error"));
+      .catch(() => {
+        $("#error-msg").html(
+          "Sorry there was an error submitting your tweet, please try later."
+        );
+        $("#error-msg").slideDown("fast");
+        return;
+      });
   });
 
   // Form toggle functionality
