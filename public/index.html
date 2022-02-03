@@ -63,7 +63,7 @@
     </nav>
     <div class="nav filler"></div>
     <div class="responsive-layout">
-      <header class="top-header">
+      <header id="top-header">
         <div class="avatar">
           <img class="avatar" src="/images/profile-hex.png" />
         </div>
@@ -72,7 +72,6 @@
       <!-- Page-specific (main) content here -->
       <main class="container">
         <section class="new-tweet">
-          <!-- <h2>Compose Tweet</h2> -->
           <p id="error-msg" class="error">You've exceeded the char limit!</p>
           <form id="newTweet" method="POST" action="/tweets">
             <label for="tweet-text">What are you humming about?</label>

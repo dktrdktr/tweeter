@@ -4,6 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 
+// Helper function to protect user input from XSS attack
 const escapeTxt = function (str) {
   let div = document.createElement("div");
   div.appendChild(document.createTextNode(str));
@@ -35,10 +36,10 @@ $(() => {
     return htmlMarkup;
   };
 
+  // loops through tweets
+  // calls createTweetElement for each tweet
+  // takes return value and prepends it to the tweets container
   const renderTweets = function (tweets) {
-    // loops through tweets
-    // calls createTweetElement for each tweet
-    // takes return value and appends it to the tweets container
     $("#tweets-container").empty();
     tweets.forEach((tweetObj) => {
       const $tweet = createTweetElement(tweetObj);
@@ -46,14 +47,17 @@ $(() => {
     });
   };
 
+  // fetches tweets from the server
   const loadTweets = () => {
     $.ajax("/tweets", { method: "GET" }).then(function (moreTweetsJson) {
       renderTweets(moreTweetsJson);
     });
   };
 
+  // fetch tweets on page load
   loadTweets();
 
+  // handle tweet form submission
   $("#newTweet").submit(function (event) {
     event.preventDefault();
     const tweetLength = $("#tweet-text").val().length;
@@ -71,7 +75,7 @@ $(() => {
       .then(() => {
         $("#tweet-text").val("");
         $(".counter").val("140");
-
+        // remove error message if it is displayed
         if ($("#error-msg").css("display") === "block") {
           $("#error-msg").css({ display: "none" });
         }

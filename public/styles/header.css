@@ -1,4 +1,4 @@
-.top-header {
+#top-header {
   height: 400px;
   width: 100%;
   background-color: #4056a1;
@@ -24,13 +24,13 @@
 }
 
 @media screen and (min-width: 768px) {
-  .top-header {
+  #top-header {
     margin: 2em;
     flex-shrink: 2;
   }
 }
 @media screen and (min-width: 1024px) {
-  .top-header {
+  #top-header {
     margin: 4em;
   }
 }
