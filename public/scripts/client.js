@@ -39,7 +39,6 @@ $(() => {
     // loops through tweets
     // calls createTweetElement for each tweet
     // takes return value and appends it to the tweets container
-    // $("#tweets-container").html("");
     $("#tweets-container").empty();
     tweets.forEach((tweetObj) => {
       const $tweet = createTweetElement(tweetObj);
