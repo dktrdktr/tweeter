@@ -28,9 +28,10 @@ nav i {
   color: red;
 }
 
-.tweet {
+#tweet-nav-button {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  cursor: pointer;
 }

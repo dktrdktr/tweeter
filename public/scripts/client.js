@@ -21,7 +21,7 @@ $(() => {
       </div>
       <span>${user.handle}</span>
     </header>
-    <p>${escapeTxt(content.text)}<</p>
+    <p>${escapeTxt(content.text)}</p>
     <footer>
       <span>${timeago.format(created_at)}</span>
       <div>
@@ -53,6 +53,7 @@ $(() => {
   };
 
   loadTweets();
+
   $("#newTweet").submit(function (event) {
     event.preventDefault();
     const tweetLength = $("#tweet-text").val().length;
@@ -77,5 +78,15 @@ $(() => {
         loadTweets();
       })
       .catch(() => alert("Sorry, there was an error"));
+  });
+
+  // Form toggle functionality
+  $("#tweet-nav-button").click(function () {
+    if ($(".new-tweet").css("display") === "block") {
+      $(".new-tweet").slideUp("fast");
+    } else {
+      $(".new-tweet").slideDown("fast");
+      $("#tweet-text").focus();
+    }
   });
 });
