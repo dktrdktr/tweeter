@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 1em;
 }
 
 .name {
@@ -20,4 +21,16 @@
   justify-content: center;
   align-items: center;
   color: white;
+}
+
+@media screen and (min-width: 768px) {
+  .top-header {
+    margin: 2em;
+    flex-shrink: 2;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .top-header {
+    margin: 4em;
+  }
 }
