@@ -17,3 +17,5 @@ Simple single-page AJAX-based Twitter clone.
 - chance
 - body-parser
 - md5
+
+!["Tweeter main page"](https://github.com/dktrdktr/tweeter/blob/master/docs/tweeter-spa.png)
