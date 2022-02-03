@@ -2,13 +2,9 @@
 
 Simple single-page AJAX-based Twitter clone.
 
-## Getting Started
+## Final product
 
-1. [Create](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) a new repository using this repository as a template.
-2. Clone your repository onto your local device.
-3. Install dependencies using the `npm install` command.
-4. Start the web server using the `npm run local` command. The app will be served at <http://localhost:8080/>.
-5. Go to <http://localhost:8080/> in your browser.
+!["Tweeter main page"](https://github.com/dktrdktr/tweeter/blob/master/docs/tweeter-spa.png)
 
 ## Dependencies
 
@@ -18,4 +14,7 @@ Simple single-page AJAX-based Twitter clone.
 - body-parser
 - md5
 
-!["Tweeter main page"](https://github.com/dktrdktr/tweeter/blob/master/docs/tweeter-spa.png)
+## Getting Started
+
+- Install all dependencies (using the npm install command).
+- Run the development web server using the node express_server.js command.
