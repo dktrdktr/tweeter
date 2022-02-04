@@ -7,7 +7,8 @@
     $("#tweet-nav-button").click(toggleTweetButton);
 
     // Handle tweet form submission
-    $("#newTweet").submit(submitTweet);
+    $tweetForm = $(".new-tweet").find("form");
+    $tweetForm.submit(submitTweet);
   });
 
   // Helper function to protect XSS attack via User Input
