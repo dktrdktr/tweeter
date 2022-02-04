@@ -1,6 +1,6 @@
 (function () {
   $(() => {
-    $("#tweet-text").on("input", onInput);
+    $(".form-textarea").on("input", onInput);
   });
 
   const onInput = function () {

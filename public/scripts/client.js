@@ -65,38 +65,45 @@
       $(".new-tweet").slideUp("fast");
     } else {
       $(".new-tweet").slideDown("fast");
-      $("#tweet-text").focus();
+      $(".form-textarea").focus();
     }
   };
 
-  const submitTweet = (event) => {
+  const submitTweet = function (event) {
     event.preventDefault();
-    const tweetLength = $("#tweet-text").val().length;
+
+    const $form = $(this);
+    const $input = $form.find("textarea");
+    const $counter = $form.find("output");
+    const $errorMsg = $form.find("p");
+
+    // validation
+    const tweetLength = $input.val().length;
     if (tweetLength > 140) {
-      $("#error-msg").html("Sorry, the tweet is too long!");
-      $("#error-msg").slideDown("fast");
+      $errorMsg.html("Sorry, the tweet is too long!");
+      $errorMsg.slideDown("fast");
       return;
     }
     if (tweetLength === 0) {
-      $("#error-msg").html("It's not possible to post an empty tweet");
-      $("#error-msg").slideDown("fast");
+      $errorMsg.html("It's not possible to post an empty tweet");
+      $errorMsg.slideDown("fast");
       return;
     }
-    $.post("/tweets", $("#newTweet").serialize())
+    $.post("/tweets", $form.serialize())
       .then(() => {
-        $("#tweet-text").val("");
-        $(".counter").val("140");
+        $input.val("");
+        $counter.val("140");
         // remove error message if it is displayed
-        if ($("#error-msg").css("display") === "block") {
-          $("#error-msg").css({ display: "none" });
+        if ($errorMsg.css("display") === "block") {
+          $errorMsg.css({ display: "none" });
         }
         loadTweets();
       })
       .catch(() => {
-        $("#error-msg").html(
+        $errorMsg.html(
           "Sorry there was an error submitting your tweet, please try later."
         );
-        $("#error-msg").slideDown("fast");
+        $errorMsg.slideDown("fast");
         return;
       });
   };
