@@ -44,7 +44,7 @@
   color: red;
 }
 
-.error {
+.form-error {
   border: solid red;
   padding: 1em;
   color: red;

@@ -60,6 +60,7 @@
     });
   };
 
+  // Form toggle functionality (for the tweet button in the nav)
   const toggleTweetButton = () => {
     if ($(".new-tweet").css("display") === "block") {
       $(".new-tweet").slideUp("fast");
@@ -69,22 +70,23 @@
     }
   };
 
+  // tweet form submission
   const submitTweet = function (event) {
     event.preventDefault();
 
     const $form = $(this);
     const $input = $form.find("textarea");
     const $counter = $form.find("output");
-    const $errorMsg = $form.find("p");
+    const $errorMsg = $form.find(".form-error");
 
     // validation
-    const tweetLength = $input.val().length;
-    if (tweetLength > 140) {
+    const tweetLen = $input.val().length;
+    if (tweetLen > 140) {
       $errorMsg.html("Sorry, the tweet is too long!");
       $errorMsg.slideDown("fast");
       return;
     }
-    if (tweetLength === 0) {
+    if (tweetLen === 0) {
       $errorMsg.html("It's not possible to post an empty tweet");
       $errorMsg.slideDown("fast");
       return;

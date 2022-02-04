@@ -69,8 +69,8 @@
       <!-- Page-specific (main) content here -->
       <main class="container">
         <section class="new-tweet">
-          <p id="error-msg" class="error">You've exceeded the char limit!</p>
           <form id="newTweet" method="POST" action="/tweets">
+            <p class="form-error"></p>
             <label for="tweet-text">What are you humming about?</label>
             <textarea
               name="text"
