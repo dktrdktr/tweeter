@@ -1,64 +1,75 @@
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
+(function () {
+  $(() => {
+    // Fetch tweets on page load
+    loadTweets();
 
-// Helper function to protect user input from XSS attack
-const escapeTxt = function (str) {
-  let div = document.createElement("div");
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
+    // Form toggle functionality
+    $("#tweet-nav-button").click(toggleTweetButton);
 
-$(() => {
+    // Handle tweet form submission
+    $("#newTweet").submit(submitTweet);
+  });
+
+  // Helper function to protect XSS attack via User Input
+  const escapeTxt = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
   const createTweetElement = ({ user, content, created_at }) => {
     const htmlMarkup = `
-    <article class="tweet">
-    <header>
-      <div>
-      <img src="${user.avatars}" alt="" />
-      <span>${user.name}</span>
-      </div>
-      <span>${user.handle}</span>
-    </header>
-    <p>${escapeTxt(content.text)}</p>
-    <footer>
-      <span>${timeago.format(created_at)}</span>
-      <div>
-        <i class="fas fa-flag"></i>
-        <i class="fas fa-retweet"></i>
-        <i class="fas fa-heart"></i>
-      </div>
-    </footer>
-  </article>
-  `;
+      <article class="tweet">
+        <header>
+          <div>
+          <img src="${user.avatars}" alt="" />
+          <span>${user.name}</span>
+          </div>
+          <span>${user.handle}</span>
+        </header>
+        <p>${escapeTxt(content.text)}</p>
+        <footer>
+          <span>${timeago.format(created_at)}</span>
+          <div>
+            <i class="fas fa-flag"></i>
+            <i class="fas fa-retweet"></i>
+            <i class="fas fa-heart"></i>
+          </div>
+        </footer>
+      </article>
+      `;
     return htmlMarkup;
   };
 
   // loops through tweets
   // calls createTweetElement for each tweet
   // takes return value and prepends it to the tweets container
-  const renderTweets = function (tweets) {
-    $("#tweets-container").empty();
-    tweets.forEach((tweetObj) => {
+  const renderTweets = function (data) {
+    $tweets = $("#tweets-container");
+    $tweets.empty();
+    data.forEach((tweetObj) => {
       const $tweet = createTweetElement(tweetObj);
-      $("#tweets-container").prepend($tweet);
+      $tweets.prepend($tweet);
     });
   };
 
-  // fetches tweets from the server
+  // Fetches and renders tweets from the server
   const loadTweets = () => {
-    $.ajax("/tweets", { method: "GET" }).then(function (moreTweetsJson) {
-      renderTweets(moreTweetsJson);
+    $.get("/tweets").then((data) => {
+      renderTweets(data);
     });
   };
 
-  // fetch tweets on page load
-  loadTweets();
+  const toggleTweetButton = () => {
+    if ($(".new-tweet").css("display") === "block") {
+      $(".new-tweet").slideUp("fast");
+    } else {
+      $(".new-tweet").slideDown("fast");
+      $("#tweet-text").focus();
+    }
+  };
 
-  // handle tweet form submission
-  $("#newTweet").submit(function (event) {
+  const submitTweet = (event) => {
     event.preventDefault();
     const tweetLength = $("#tweet-text").val().length;
     if (tweetLength > 140) {
@@ -88,15 +99,5 @@ $(() => {
         $("#error-msg").slideDown("fast");
         return;
       });
-  });
-
-  // Form toggle functionality
-  $("#tweet-nav-button").click(function () {
-    if ($(".new-tweet").css("display") === "block") {
-      $(".new-tweet").slideUp("fast");
-    } else {
-      $(".new-tweet").slideDown("fast");
-      $("#tweet-text").focus();
-    }
-  });
-});
+  };
+})();
